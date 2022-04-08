@@ -22,8 +22,8 @@ public class GiphyController {
     public String getGiphy (@RequestParam String q, @RequestParam Integer limit, @RequestParam String rating, Model model) {
         
         System.out.printf(">>>>> q = %s, limit = %d, rating = %s\n", q, limit, rating);
-        model.addAttribute("q", q);
         List<String> result = giphySvc.getGiphs(q, rating, limit);
+        model.addAttribute("q", q);
         model.addAttribute("result", result);
         return "search-result";
     }

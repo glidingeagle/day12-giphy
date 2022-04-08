@@ -19,7 +19,7 @@ class Day12giphyApplicationTests {
 	@Test
 	void shouldLoad10Images() {
 		List<String> gifs = giphySvc.getGiphs("dog");
-		assertEquals(10, gifs.size());
+		assertEquals(10, gifs.size(), "Default number of gifs");
 	}
 
 }
