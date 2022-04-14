@@ -1,4 +1,4 @@
-package PAF.Day12giphy.services;
+package PAF.Day12giphy.service;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -29,7 +29,7 @@ public class GiphyService {
 
     private static final String GIPHY_SEARCH = "https://api.giphy.com/v1/gifs/search";
 
-    //this is to print out the api_key
+    //this is to print out the api_key and will not affect if it is not present in the code
     @PostConstruct
     public void init() {
         System.out.printf("api key: %s\n", giphyKey);
@@ -71,7 +71,7 @@ public class GiphyService {
             return result;
         }
 
-        //image fixed_width.irl
+        //image fixed_width.url
         JsonReader reader = Json.createReader(new StringReader(response.getBody()));
         JsonObject gifs = reader.readObject();
         JsonArray data = gifs.getJsonArray("data");
@@ -80,18 +80,22 @@ public class GiphyService {
             String image = gif.getJsonObject("images").getJsonObject("fixed_width").getString("url");
             result.add(image);
         }
-        // InputStream is = new ByteArrayInputStream(response.getBody().getBtyes()) {
-        //     JsonReader reader = Json.createReader(is);
-        //     JsonObject obj = reader.readObject();
-            
-        //     JsonArray dataBody = obj.getJsonArray("data");
-        //     for (int i=0; i<dataBody.size(); i++) {
-        //         JsonObject jsonObj = dataBody(i);
-
-        //     }
-        // }
         return result;
-    }
+        
 
-    
+        //alternatively, you can use this code too
+        // InputStream is = new ByteArrayInputStream(response.getBody().getBytes());
+        // JsonReader reader = Json.createReader(is);
+        // JsonObject obj = reader.readObject();
+            
+        // JsonArray dataBody = obj.getJsonArray("data");
+        // for (int i=0; i<dataBody.size(); i++) {
+        //     String image = dataBody.getJsonObject(i)
+        //             .getJsonObject("images")
+        //             .getJsonObject("fixed_width")
+        //             .getString("url");
+        //     result.add(image);
+        // }
+        // return result;
+    }
 }
